@@ -1,0 +1,162 @@
+State - from zip merge
+	1	Alabama
+	2	Alaska
+	4	Arizona
+	5	Arkansas
+	6	California
+	8	Colorado
+	9	Connecticut
+	10	Delaware
+	11	District of Columbia
+	12	Florida
+	13	Georgia
+	15	Hawaii
+	16	Idaho
+	17	Illinois
+	18	Indiana
+	19	Iowa
+	20	Kansas
+	21	Kentucky
+	22	Louisiana
+	23	Maine
+	24	Maryland
+	25	Massachusetts
+	26	Michigan
+	27	Minnesota
+	28	Mississippi
+	29	Missouri
+	30	Montana
+	31	Nebraska
+	32	Nevada
+	33	New Hampshire
+	34	New Jersey
+	35	New Mexico
+	36	New York
+	37	North Carolina
+	38	North Dakota
+	39	Ohio
+	40	Oklahoma
+	41	Oregon
+	42	Pennsylvania
+	44	Rhode Island
+	45	South Carolina
+	46	South Dakota
+	47	Tennessee
+	48	Texas
+	49	Utah
+	50	Vermont
+	51	Virginia
+	53	Washington
+	54	West Virginia
+	55	Wisconsin
+	56	Wyoming
+
+Q.1 Do you approve or disapprove of the way Barack Obama is handling his job as President?
+	1	Approve
+	2	Disapprove
+	9	Don't know/Refused (VOL.)
+
+Q.2 All in all, are you satisfied or dissatisfied with the way things are going in this country today?
+	1	Satisfied
+	2	Dissatisfied
+	9	Don’t know/Refused (VOL.)
+
+Q.55 How would you rate economic conditions in this country today… as excellent, good, only fair, or poor?
+	1	Excellent
+	2	Good
+	3	Only fair
+	4	Poor
+	9	Don’t know/Refused (VOL.)
+
+Q.56 A year from now, do you expect that economic conditions in the country as a whole will be better than they are at present, or worse, or just about the same as now?
+	1	Better
+	2	Worse
+	3	Same
+	9	Don’t know/Refused (VOL.)
+
+SEX. Respondent’s sex
+	1	Male
+	2	Female
+
+AGE. What is your age?
+	97	97 or older
+	99	(DO NOT READ) Refused
+
+EDUC. What is the highest level of school you have completed or the highest degree you have received? [DO NOT READ]
+	1	Less than high school (Grades 1-8 or no formal schooling)
+	2	High school incomplete (Grades 9-11 or Grade 12 with NO diploma)
+	3	High school graduate (Grade 12 with diploma or GED certificate)
+	4	Some college, no degree (includes community college)
+	5	Two year associate degree from a college or university
+	6	Four year college or university degree/Bachelor’s degree (e.g., BS, BA, AB)
+	7	Some postgraduate or professional schooling, no postgraduate degree
+	8	Postgraduate or professional degree, including master’s, doctorate, medical or law degree (e.g., MA, MS, PhD, MD, JD)
+	9	Don't know/Refused (VOL.)
+
+HISP. Are you of Hispanic or Latino origin, such as Mexican, Puerto Rican, Cuban or some other Spanish background?
+	1	Yes
+	2	No
+	9	(DO NOT READ) Don't know/Refused
+
+Combining Race
+	1	White
+	2	Black
+	3	Asian
+	4	Mixed Race
+	5	Some other race
+	9	Don't know/Refused (VOL.)
+
+RELIG What is your present religion, if any? Are you Protestant, Roman Catholic, Mormon, Orthodox such as Greek or Russian Orthodox, Jewish, Muslim, Buddhist, Hindu, atheist, agnostic, something else, or nothing in particular?
+	1	Protestant
+	2	Roman Catholic (Catholic)
+	3	Mormon (Church of Jesus Christ of Latter-day Saints/LDS)
+	4	Orthodox (Greek, Russian, or some other orthodox church)
+	5	Jewish (Judaism)
+	6	Muslim (Islam)
+	7	Buddhist
+	8	Hindu
+	9	Atheist (do not believe in God)
+	10	Agnostic (not sure if there is a God)
+	11	Something else (SPECIFY)
+	12	Nothing in particular
+	13	Christian (VOL.)
+	14	Unitarian (Universalist) (VOL.)
+	99	Don't Know/Refused (VOL.)
+
+INCOME. Last year, that is in 2011, approximately what was your total family income before taxes?
+	1	Less than $10,000
+	2	$10,000 to under $20,000
+	3	$20,000 to under $30,000
+	4	$30,000 to under $40,000
+	5	$40,000 to under $50,000
+	6	$50,000 to under $75,000
+	7	$75,000 to under $100,000
+	8	$100,000 to under $150,000
+	9	$150,000 or over
+	10	(DO NOT READ) Don't know/Refused
+
+PARTY. In politics TODAY, do you consider yourself a Republican, Democrat, or Independent?
+	1	Republican
+	2	Democrat
+	3	Independent
+	4	No preference (VOL.)
+	5	Other party (VOL.)
+	9	(DO NOT READ) Don't know/Refused
+
+PARTYLN. As of today do you lean more to the Republican Party or more to the Democratic Party?
+	1	Republican
+	2	Democratic
+	9	(DO NOT READ) Other/Don't know/Refused
+
+IDEO In general, would you describe your political views as... [READ]
+	1	Very conservative
+	2	Conservative
+	3	Moderate
+	4	Liberal [OR]
+	5	Very liberal
+	9	[VOL. DO NOT READ] Don't know/Refused
+
+HH.1 How many people, including yourself, live in your household?
+	8	8 or more
+	9	Don’t know/Refused
+
