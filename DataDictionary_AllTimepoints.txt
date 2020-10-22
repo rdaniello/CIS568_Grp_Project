@@ -1,0 +1,120 @@
+state
+	1	Alabama
+	2	Alaska
+	4	Arizona
+	5	Arkansas
+	6	California
+	8	Colorado
+	9	Connecticut
+	10	Delaware
+	11	District of Columbia
+	12	Florida
+	13	Georgia
+	15	Hawaii
+	16	Idaho
+	17	Illinois
+	18	Indiana
+	19	Iowa
+	20	Kansas
+	21	Kentucky
+	22	Louisiana
+	23	Maine
+	24	Maryland
+	25	Massachusetts
+	26	Michigan
+	27	Minnesota
+	28	Mississippi
+	29	Missouri
+	30	Montana
+	31	Nebraska
+	32	Nevada
+	33	New Hampshire
+	34	New Jersey
+	35	New Mexico
+	36	New York
+	37	North Carolina
+	38	North Dakota
+	39	Ohio
+	40	Oklahoma
+	41	Oregon
+	42	Pennsylvania
+	44	Rhode Island
+	45	South Carolina
+	46	South Dakota
+	47	Tennessee
+	48	Texas
+	49	Utah
+	50	Vermont
+	51	Virginia
+	53	Washington
+	54	West Virginia
+	55	Wisconsin
+	56	Wyoming
+
+sex
+	1	Male
+	2	Female
+
+age
+	97	97 or older
+	99	Refused
+
+educ
+	1	Less than high school (Grades 1-8 or no formal schooling)
+	2	High school incomplete (Grades 9-11 or Grade 12 with NO diploma)
+	3	High school graduate (Grade 12 with diploma or GED certificate)
+	5	Some college, no 4-year degree 
+	6	Four year college or university degree/Bachelor’s degree (e.g., BS, BA, AB)
+	7	Some postgraduate or professional schooling, no postgraduate degree
+	9	Don't know/Refused 
+
+hisp
+	1	Yes
+	2	No
+	9	Don't know/Refused
+
+racecmb
+	1	White
+	2	Black
+	3	Asian
+	4	Other or mixed race   
+	9	Don't know/Refused 
+
+relig
+	1	Protestant/Baptist/Christian/Episcopal/Jehovah's Witness/Lutheran/etc
+	2	Roman Catholic (Catholic)
+	3	Jewish 
+	4	Mormon (include Church of Jesus Christ of Latter Day Saints)
+	5	Orthodox Church (Greek or Russian) 
+	6	Muslim (Islam)
+	7	Other religion 
+	8	No religion, atheist
+	9	Don't know/Refused 
+
+income
+	1	Less than $10,000
+	2	$10,000 to under $20,000
+	3	$20,000 to under $30,000
+	4	$30,000 to under $40,000
+	5	$40,000 to under $50,000
+	6	$50,000 to under $75,000
+	7	$75,000 to under $100,000
+	8	$100,000 or more
+	9	Don't know/Refused 
+
+party
+	1	Republican
+	2	Democrat
+	3	Independent
+	4	No preference
+	5	Other party 
+	9	Don't know/Refused
+
+partyln As of today do you lean more to the Republican Party or more to the Democratic Party?
+	** if 'party' is 1 or 2 then this is blank
+	1	Republican
+	2	Democratic
+	9	Other/Don't know/Refused
+
+
+
