@@ -1,0 +1,21 @@
+﻿democlass,text,val
+racemb,All,-1
+racemb,White,1
+racemb,Black,2
+racemb,Asian,3
+racemb,Other/ Mixed Race,4
+racemb,Don't Know/ Refused,9
+relig,All,-1
+relig,Protestant,1
+relig,Roman Catholic,2
+relig,Jewish,3
+relig,Mormon,4
+relig,Orthodox,5
+relig,Muslim,6
+relig,Other,7
+relig,Atheist/ No religion,8
+relig,Don’t' know/ Refused,9
+hisp,All,-1
+hisp,Hispanic,1
+hisp,Not Hispanic,2
+hisp,Don’t' know/ Refused,9

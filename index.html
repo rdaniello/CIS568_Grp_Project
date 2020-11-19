@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>National Weight Control Registry - Data Exploration</title>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="https://d3js.org/topojson.v2.min.js"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href='./styles.css' type="text/css">
+
+</head>
+<body>
+    <div id="caption" class='text-center'>
+        National Weight Control Registry - Data Exploration
+    </div>
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link" id="profile-tab" data-toggle="tab" href="#strat" role="tab" aria-controls="strat"
+            aria-selected="false">Explore Race Religion Ethnicity</a>
+        </li>
+      </ul>
+      <div class="tab-content" id="myTabContent" style='padding-top:10px; '>
+        <div class="tab-pane fade show active" id="strat" role="tabpanel" aria-labelledby="strat-tab">
+            <div class='container-fluid' style='margin-bottom:50px'>
+                <div class="row" style='margin-bottom: 15px;'>
+                    <div class='col-4 offset-4' style='border:1px solid steelblue; border-radius:10px;'>
+                        <div class="row" style='margin:10px;''>
+                            <div class="select" style='padding-right:10px;'> 
+                                <select name="slct" id="slct" onchange='demoDDChange(value)'> 
+                                    <option value="racemb">Race</option> 
+                                    <option value="relig">Religion</option> 
+                                    <option value="hisp">Ethnicity</option> 
+                                </select> 
+                            </div> 
+                        </div>
+                        <!-- Demo selection divs added dyanmically here -->
+                        <div id='demoOptions' class='text-center' style='padding-top:5px; padding-left:10px '></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class='col-6' >
+                        <div id='container2' style = 'margin-right:15px; margin-left: 15px;'>
+                            <div class='row' style="background-color:rgb(247, 244, 241); border-radius: 10px; padding:5px; border-radius: 10px; border:1px solid steelblue;">
+                                <svg id='canvasDemo' width=100% height=100% viewbox='0 0 1000 600' style="background-color:rgb(247, 244, 241);" ></svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='col-6' >
+                        <div id='container2' style = 'margin-right:15px'>
+                            <div class='row' style="background-color:rgb(247, 244, 241); border-radius: 10px; padding:5px; border-radius: 10px; border:1px solid steelblue;">
+                                <svg id='canvasDemo2' width=100% height=100% viewbox='0 0 1000 590' style="background-color:rgb(247, 244, 241);" ></svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    <script>
+        let selDemoVar = 'tot';
+        let jan20Data = null
+        let jun12Data = null
+        let may00Data = null
+        let dRadData = null
+
+        let svgDemo = d3.select('#canvasDemo');
+        // get the data and build map -- call main
+        let jan20CSV = './Jan20_dataset_recoded.csv'; // 2020 data
+        let jun12CSV = './June12_dataset_recoded.csv'; // 2012 data
+        let may00CSV = './May00_dataset_recoded.csv'; // 2000 data
+        let demoRadio = './d_radio.csv'; // demo radio buttons
+        /* let projection = d3.geoAlbersUsa()
+            .scale(1300)
+            .translate([500,400]); */
+        Promise.all(
+            [
+                d3.csv(jan20CSV ),
+                d3.csv(jun12CSV),
+                d3.csv(may00CSV),
+                d3.csv(demoRadio)
+/*                 d3.csv(stratCSV),
+                d3.csv(comorbCSV),
+                d3.csv(echartsCSV) */
+            ], d3.autoType())
+            .then(main)
+
+        // initializes global variables from passed data
+        function main(data){
+            //geoData = topojson.feature(data[0], data[0].objects.cb_2018_us_state_5m).features;
+            //geo_generator = d3.geoPath().projection(projection);
+            //totData = d3.group(data[1], function(d){return d.state});
+            data20 = data[0];
+            //mapDataArr = data[1];
+            data12 = data[1];
+            data00 = data[2];
+            dRadData = data[3];
+            
+            // add instruction text to bar graph tabs
+            d3.select('#canvasDemo')
+                .append('g')
+                .append('text')
+                    .attr('y',400)
+                    .attr('x', 500)
+                    .style("text-anchor", "middle")
+                    .style('font-size','26px')
+                    .style('font-weight','bold')
+                    .style('fill','steelblue')
+                    .text("Select a Demo");
+            
+            console.log(data00);
+            console.log(data12);
+            console.log(data20);
+
+            demoDDChange('racemb');  // populate demo dropdown
+        }
+
+        function getDataSum(data, feature, val){
+            filData = data.filter(function(d){
+                    return d[feature] == val
+            })
+
+            // if -1 return all counts
+            if(val == -1){
+                filData = data;
+            }
+        
+            // get the counts 
+            let memparty = filData.filter(function(d){
+                return (d['party'] == 1 || d['party'] == 2 )
+            })
+            let leanparty = filData.filter(function(d){
+                return ( d['partyln'] == 1 || d['partyln'] == 2)
+            })
+
+            let retVals = {memPerc: (memparty.length / filData.length)
+                , leanPerc: (leanparty.length / (filData.length - memparty.length))
+                , totperc: ((leanparty.length + memparty.length) / filData.length)}
+            console.log(retVals)
+            return retVals
+        }
+
+        function getChartData(feature, selVal){
+            // get total for party membership and party lean for each timepoint
+            fil00 = getDataSum(data00, feature, selVal);
+            fil12 = getDataSum(data12, feature, selVal);
+            fil20 = getDataSum(data20, feature, selVal);
+
+            return[[{name:'2000', val: fil00.memPerc * 100}
+                    ,{name:'2012', val: fil12.memPerc * 100}
+                    ,{name:'2020', val: fil20.memPerc * 100}
+                    ],
+                    [
+                     {name:'2000', val: fil00.leanPerc * 100}
+                    ,{name:'2012', val: fil12.leanPerc * 100}
+                    ,{name:'2020', val: fil20.leanPerc * 100}
+                    ]
+                ]
+        }
+
+        function updateDemo(cat, selVal){
+            // get the values for each bar
+            chartData = getChartData(cat,selVal);
+            barValsLean = chartData[1];
+            updateChart(barValsLean, 'canvasDemo', 'Party Leaning of Non-Party Members','% Party Lean', 'Year');
+            barValsMem = chartData[0];
+            updateChart(barValsMem, 'canvasDemo2', 'Party Membership by Year','% Party Membership', 'Year');
+        }
+
+        function updateChart(data, svgID, title, xLabel, yLabel){
+            let barMargin = 25;
+            let VarLabels =[];
+            let barVals = data;
+
+            data.forEach(element => {
+                VarLabels.push(element.name);
+            });
+
+            // select svg element
+            let svg = d3.select('svg#' + svgID);
+            let margins = {x:100, y:100};
+
+            // update the select variable to the display value
+            svg.selectAll('g')
+                .remove();
+            
+            // get the data and svg element extent (range and domain)
+            // viewbox - range
+            let rng = svg.attr('viewBox').split(' ');
+            rng = d3.map(rng, function(d){return parseInt(d)});
+            let xRng = [rng[0] + margins.x, rng[2] - margins.x];
+            let yRng = [rng[3] - margins.y, rng[1] + margins.y];
+            let height = parseInt(rng[3]);
+            let width = parseInt(rng[2]);
+            
+            // number of selected strats and number - domain
+            let name_extent = d3.extent(barVals,
+                function (d){
+                        return d.name;
+                })
+            let total_extent = d3.extent(barVals,
+                function (d){
+                        return d.val;
+                })
+            total_extent[0] = (Math.floor(total_extent[0] / 10) * 10) - 5;
+            total_extent[1] = 100;
+
+            // make the X and Y scale
+            let xScale = d3.scaleBand()
+                .domain(VarLabels)
+                .range(xRng)
+            let yScale  = d3.scaleLinear().domain(total_extent).range(yRng)
+            let colorscale = d3.scaleOrdinal()
+                .domain([0, barVals.length])
+                .range(d3.schemeSet3);
+
+            // strat canvas
+            let stratCanvas = svg.append('g')
+                                .attr('id','demoCanvas');
+            
+            // add the bars
+            stratCanvas.selectAll('rect')
+                .data(barVals)
+                .enter()
+                .append("rect")
+                .attr("x", function(d) { return xScale.bandwidth() - barMargin })
+                .attr("y", function(d) { return height - yScale(d.val) - margins.y})
+                .attr("width", xScale.bandwidth() - barMargin)
+                .transition()
+                    .delay(1)
+                    .duration(500)
+                .attr("x", function(d) { return xScale(d.name) + barMargin / 2; })
+                .attr("y", function(d) { return yScale(d.val); })
+                .attr("width", xScale.bandwidth() - barMargin)
+                .attr("height", function(d) { return height - yScale(d.val) - margins.y })
+                .attr('fill', function(d,i){return colorscale(i)})
+
+            // add value labels to bars
+            stratCanvas.selectAll('text')
+                .data(barVals)
+                .enter()
+                .append("text")
+                .text(function(d){return(d.val.toFixed(1) + '%')})
+                .style('font-size','18px')
+                .attr("x", function(d) { return xScale(d.name) + xScale.bandwidth() /2; })
+                .attr("y", function(d) { return height })
+                .transition()
+                    .delay(1)
+                    .duration(750)
+                .attr("x", function(d) { return xScale(d.name) + xScale.bandwidth() /2; })
+                .attr("y", function(d) { return yScale(d.val) + 20; })
+                .attr('fill', 'white')
+                .style("text-anchor", "middle") 
+
+            // add the axis
+            let xAxis = svg.append('g')
+                .attr('class',"axisStyle")
+                .attr('transform', 'translate('+(0)+','+(yRng[0])+")")
+                .call(d3.axisBottom(xScale))
+                .selectAll('text')
+                    .attr("dx", "-0.4em")
+                    .attr("dy", "1.24em")
+                    .attr("transform", "rotate(-16)" )
+            let yAxis = svg.append('g')
+                .attr('class',"axisStyle")
+                .attr('transform', 'translate('+(margins.x)+','+(0)+")")
+                .call(d3.axisLeft(yScale));
+
+            // add the axis labels
+            svg.append("text")
+                .attr("transform", "rotate(-90)")
+                .attr("y", 0 + margins.y /8)
+                .attr("x",0 - height / 2)
+                .attr("dy", "1em")
+                .style("text-anchor", "middle")
+                .style('font-size','20px')
+                .style('font-weight','bold')
+                .style('fill','steelblue')
+                .text(xLabel);
+            svg.append("text")             
+                .attr("y", height - margins.y /8)
+                .attr("x", width / 2)
+                .style("text-anchor", "middle")
+                .style('font-size','20px')
+                .style('font-weight','bold')
+                .style('fill','steelblue')
+                .text(yLabel);
+            
+            // add the title
+            svg.append('text')
+                .attr('y',30)
+                .attr('x', width / 2)
+                .style("text-anchor", "middle")
+                .style('font-size','26px')
+                .style('font-weight','bold')
+                .style('fill','steelblue')
+                .text(title);
+        }
+
+
+        function demoDDChange(val){
+            d3.selectAll('.demoDiv').remove(); // remove current demo radio buttons
+            let demoDD = d3.select('#demoOptions') // get div to add radio buttons to
+            demoDD.selectAll('div')
+                .data(dRadData)
+                .enter()
+                .filter(function(d) { return d.democlass == val})
+                .append('div') // add a div for each radio to add
+                .attr('class', 'radio demoDiv text-left')
+                .attr('onclick', function(d) { return "updateDemo('"+  val + "'," + d.val + ")" })
+                .text(function(d){return d.text})
+                .on('mouseenter', function(mouseData,d){
+                    try{
+                        d3.select(this)
+                            .style('background-color','rgb(247, 244, 241)')
+                            .style('border-radius','5px')
+                            .style('border','solid 1px black');
+                    }
+                    catch{
+                    }
+                })
+                .on('mouseleave', function(mouseData,d){
+                    try{
+                        d3.select(this)
+                            .style('background-color','rgba(0,0,0,0)')
+                            .style('border','solid 0px black');
+                    }
+                    catch{
+                    }
+                })
+                ;
+                
+            updateDemo(val,-1); // update bar chart
+        }
+    </script>
+</body>
+</html>

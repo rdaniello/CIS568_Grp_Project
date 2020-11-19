@@ -1,4 +1,4 @@
-state,sex,age,educ,hisp,racemb,relig,income,party,partln
+state,sex,age,educ,hisp,racemb,relig,income,party,partyln
 24,2,52,3,2,2,01,1,2, 
 12,1,64,7,2,1,02,4,1, 
 42,1,45,7,2,1,08,3,3,2
