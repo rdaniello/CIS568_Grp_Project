@@ -42,7 +42,1090 @@
         <div class="tab-pane fade show active" id="salim" role="tabpanel" aria-labelledby="salim-tab">
             <div class='container-fluid' style='margin-bottom:50px'>
                 <div class="row" style='margin-bottom: 15px;'>
-                   Salim Tab
+                   Salim Tab<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Voter Polarization 2000 - 2020</title>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="https://d3js.org/topojson.v2.min.js"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href='./styles.css' type="text/css">
+
+</head>
+<body>
+    <div id="caption" class='text-center'>
+        Party Membership and Leaning of Independent Voters - Data exploration
+    </div>
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link" id="salim-tab" data-toggle="tab" href="#salim" role="tab" aria-controls="salim"
+              aria-selected="true">Political Affiliation (Democrat/Republican)</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="rich-tab" data-toggle="tab" href="#rich" role="tab" aria-controls="rich"
+            aria-selected="false">Explore Race Religion Ethnicity</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="amough-tab" data-toggle="tab" href="#amough" role="tab" aria-controls="amough"
+              aria-selected="false">Amough</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="michael-tab" data-toggle="tab" href="#michael" role="tab" aria-controls="michael"
+              aria-selected="false">Michael</a>
+        </li>
+      </ul>
+      <div class="tab-content" id="myTabContent" style='padding-top:10px; '>
+        <!-- Salim Tab -->
+        <div class="tab-pane fade show active" id="salim" role="tabpanel" aria-labelledby="salim-tab">
+            <div class='container-fluid' style='margin-bottom:50px'>
+                <div class="row" style='margin-bottom: 15px;'>
+                    <div class="col-12 d-flex justify-content-center mb-3">
+                        <div id="year-toggle"></div>
+                    </div>
+                   <div class="col-12 d-flex justify-content-center">
+                       <div id="choropleth"></div>
+                   </div>
+                </div>
+            </div>
+        </div>
+        <!-- Rich Tab -->
+        <div class="tab-pane fade" id="rich" role="tabpanel" aria-labelledby="rich-tab">
+            <div class='container-fluid' style='margin-bottom:50px'>
+                <div class="row" style='margin-bottom: 15px;'>
+                    <div class='col-4 offset-4' style='border:1px solid steelblue; border-radius:10px;'>
+                        <div class="row" style='margin:10px;'>
+                            <div class="select" style='padding-right:10px;'>
+                                <select name="slct" id="slct" onchange='demoDDChange(value)'>
+                                    <option value="racemb">Race</option>
+                                    <option value="relig">Religion</option>
+                                    <option value="hisp">Ethnicity</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- Demo selection divs added dyanmically here -->
+                        <div id='demoOptions' class='text-center' style='padding-top:5px; padding-left:10px '></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class='col-6' >
+                        <div id='container2' style = 'margin-right:15px; margin-left: 15px;'>
+                            <div class='row' style="background-color:rgb(247, 244, 241); border-radius: 10px; padding:5px; border-radius: 10px; border:1px solid steelblue;">
+                                <svg id='canvasDemo' width=100% height=100% viewbox='0 0 1000 600' style="background-color:rgb(247, 244, 241);" ></svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='col-6' >
+                        <div id='container2' style = 'margin-right:15px'>
+                            <div class='row' style="background-color:rgb(247, 244, 241); border-radius: 10px; padding:5px; border-radius: 10px; border:1px solid steelblue;">
+                                <svg id='canvasDemo2' width=100% height=100% viewbox='0 0 1000 590' style="background-color:rgb(247, 244, 241);" ></svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Amough Tab -->
+        <div class="tab-pane fade" id="amough" role="tabpanel" aria-labelledby="amough-tab">
+            <div class='container-fluid' style='margin-bottom:50px'>
+                <div class="row" style='margin-bottom: 15px;'>
+                Amough
+                </div>
+            </div>
+        </div>
+        <!-- Michael Tab -->
+        <div class="tab-pane fade" id="michael" role="tabpanel" aria-labelledby="michael-tab">
+            <div class='container-fluid' style='margin-bottom:50px'>
+                <div class="row" style='margin-bottom: 15px;'>
+                Michael
+                </div>
+            </div>
+        </div>
+      </div>
+  </div>
+    <script>
+        let selDemoVar = 'tot';
+        let jan20Data = null
+        let jun12Data = null
+        let may00Data = null
+        let dRadData = null
+
+        let svgDemo = d3.select('#canvasDemo');
+        // get the data and build map -- call main
+        let jan20CSV = './Jan20_dataset_recoded.csv'; // 2020 data
+        let jun12CSV = './June12_dataset_recoded.csv'; // 2012 data
+        let may00CSV = './May00_dataset_recoded.csv'; // 2000 data
+        let demoRadio = './d_radio.csv'; // demo radio buttons
+        /* let projection = d3.geoAlbersUsa()
+            .scale(1300)
+            .translate([500,400]); */
+        Promise.all(
+            [
+                d3.csv(jan20CSV ),
+                d3.csv(jun12CSV),
+                d3.csv(may00CSV),
+                d3.csv(demoRadio)
+/*                 d3.csv(stratCSV),
+                d3.csv(comorbCSV),
+                d3.csv(echartsCSV) */
+            ], d3.autoType())
+            .then(main)
+
+        // initializes global variables from passed data
+        function main(data){
+            //geoData = topojson.feature(data[0], data[0].objects.cb_2018_us_state_5m).features;
+            //geo_generator = d3.geoPath().projection(projection);
+            //totData = d3.group(data[1], function(d){return d.state});
+            data20 = data[0];
+            //mapDataArr = data[1];
+            data12 = data[1];
+            data00 = data[2];
+            dRadData = data[3];
+
+            // add instruction text to bar graph tabs
+            d3.select('#canvasDemo')
+                .append('g')
+                .append('text')
+                    .attr('y',400)
+                    .attr('x', 500)
+                    .style("text-anchor", "middle")
+                    .style('font-size','26px')
+                    .style('font-weight','bold')
+                    .style('fill','steelblue')
+                    .text("Select a Demo");
+
+            console.log(data00);
+            console.log(data12);
+            console.log(data20);
+
+            demoDDChange('racemb');  // populate demo dropdown
+        }
+
+        function getDataSum(data, feature, val){
+            filData = data.filter(function(d){
+                    return d[feature] == val
+            })
+
+            // if -1 return all counts
+            if(val == -1){
+                filData = data;
+            }
+
+            // get the counts
+            let memparty = filData.filter(function(d){
+                return (d['party'] == 1 || d['party'] == 2 )
+            })
+            let leanparty = filData.filter(function(d){
+                return ( d['partyln'] == 1 || d['partyln'] == 2)
+            })
+
+            let retVals = {memPerc: (memparty.length / filData.length)
+                , leanPerc: (leanparty.length / (filData.length - memparty.length))
+                , totperc: ((leanparty.length + memparty.length) / filData.length)}
+            console.log(retVals)
+            return retVals
+        }
+
+        function getChartData(feature, selVal){
+            // get total for party membership and party lean for each timepoint
+            fil00 = getDataSum(data00, feature, selVal);
+            fil12 = getDataSum(data12, feature, selVal);
+            fil20 = getDataSum(data20, feature, selVal);
+
+            return[[{name:'2000', val: fil00.memPerc * 100}
+                    ,{name:'2012', val: fil12.memPerc * 100}
+                    ,{name:'2020', val: fil20.memPerc * 100}
+                    ],
+                    [
+                     {name:'2000', val: fil00.leanPerc * 100}
+                    ,{name:'2012', val: fil12.leanPerc * 100}
+                    ,{name:'2020', val: fil20.leanPerc * 100}
+                    ]
+                ]
+        }
+
+        function updateDemo(cat, selVal){
+            // get the values for each bar
+            chartData = getChartData(cat,selVal);
+            barValsLean = chartData[1];
+            updateChart(barValsLean, 'canvasDemo', 'Party Leaning of Non-Party Members','% Party Lean', 'Year');
+            barValsMem = chartData[0];
+            updateChart(barValsMem, 'canvasDemo2', 'Party Membership by Year','% Party Membership', 'Year');
+        }
+
+        function updateChart(data, svgID, title, xLabel, yLabel){
+            let barMargin = 25;
+            let VarLabels =[];
+            let barVals = data;
+
+            data.forEach(element => {
+                VarLabels.push(element.name);
+            });
+
+            // select svg element
+            let svg = d3.select('svg#' + svgID);
+            let margins = {x:100, y:100};
+
+            // update the select variable to the display value
+            svg.selectAll('g')
+                .remove();
+
+            // get the data and svg element extent (range and domain)
+            // viewbox - range
+            let rng = svg.attr('viewBox').split(' ');
+            rng = d3.map(rng, function(d){return parseInt(d)});
+            let xRng = [rng[0] + margins.x, rng[2] - margins.x];
+            let yRng = [rng[3] - margins.y, rng[1] + margins.y];
+            let height = parseInt(rng[3]);
+            let width = parseInt(rng[2]);
+
+            // number of selected strats and number - domain
+            let name_extent = d3.extent(barVals,
+                function (d){
+                        return d.name;
+                })
+            let total_extent = d3.extent(barVals,
+                function (d){
+                        return d.val;
+                })
+            total_extent[0] = (Math.floor(total_extent[0] / 10) * 10) - 5;
+            total_extent[1] = 100;
+
+            // make the X and Y scale
+            let xScale = d3.scaleBand()
+                .domain(VarLabels)
+                .range(xRng)
+            let yScale  = d3.scaleLinear().domain(total_extent).range(yRng)
+            let colorscale = d3.scaleOrdinal()
+                .domain([0, barVals.length])
+                .range(d3.schemeSet3);
+
+            // strat canvas
+            let stratCanvas = svg.append('g')
+                                .attr('id','demoCanvas');
+
+            // add the bars
+            stratCanvas.selectAll('rect')
+                .data(barVals)
+                .enter()
+                .append("rect")
+                .attr("x", function(d) { return xScale.bandwidth() - barMargin })
+                .attr("y", function(d) { return height - yScale(d.val) - margins.y})
+                .attr("width", xScale.bandwidth() - barMargin)
+                .transition()
+                    .delay(1)
+                    .duration(500)
+                .attr("x", function(d) { return xScale(d.name) + barMargin / 2; })
+                .attr("y", function(d) { return yScale(d.val); })
+                .attr("width", xScale.bandwidth() - barMargin)
+                .attr("height", function(d) { return height - yScale(d.val) - margins.y })
+                .attr('fill', function(d,i){return colorscale(i)})
+
+            // add value labels to bars
+            stratCanvas.selectAll('text')
+                .data(barVals)
+                .enter()
+                .append("text")
+                .text(function(d){return(d.val.toFixed(1) + '%')})
+                .style('font-size','18px')
+                .attr("x", function(d) { return xScale(d.name) + xScale.bandwidth() /2; })
+                .attr("y", function(d) { return height })
+                .transition()
+                    .delay(1)
+                    .duration(750)
+                .attr("x", function(d) { return xScale(d.name) + xScale.bandwidth() /2; })
+                .attr("y", function(d) { return yScale(d.val) + 20; })
+                .attr('fill', 'white')
+                .style("text-anchor", "middle")
+
+            // add the axis
+            let xAxis = svg.append('g')
+                .attr('class',"axisStyle")
+                .attr('transform', 'translate('+(0)+','+(yRng[0])+")")
+                .call(d3.axisBottom(xScale))
+                .selectAll('text')
+                    .attr("dx", "-0.4em")
+                    .attr("dy", "1.24em")
+                    .attr("transform", "rotate(-16)" )
+            let yAxis = svg.append('g')
+                .attr('class',"axisStyle")
+                .attr('transform', 'translate('+(margins.x)+','+(0)+")")
+                .call(d3.axisLeft(yScale));
+
+            // add the axis labels
+            svg.append("text")
+                .attr("transform", "rotate(-90)")
+                .attr("y", 0 + margins.y /8)
+                .attr("x",0 - height / 2)
+                .attr("dy", "1em")
+                .style("text-anchor", "middle")
+                .style('font-size','20px')
+                .style('font-weight','bold')
+                .style('fill','steelblue')
+                .text(xLabel);
+            svg.append("text")
+                .attr("y", height - margins.y /8)
+                .attr("x", width / 2)
+                .style("text-anchor", "middle")
+                .style('font-size','20px')
+                .style('font-weight','bold')
+                .style('fill','steelblue')
+                .text(yLabel);
+
+            // add the title
+            svg.append('text')
+                .attr('y',30)
+                .attr('x', width / 2)
+                .style("text-anchor", "middle")
+                .style('font-size','26px')
+                .style('font-weight','bold')
+                .style('fill','steelblue')
+                .text(title);
+        }
+
+
+        function demoDDChange(val){
+            d3.selectAll('.demoDiv').remove(); // remove current demo radio buttons
+            let demoDD = d3.select('#demoOptions') // get div to add radio buttons to
+            demoDD.selectAll('div')
+                .data(dRadData)
+                .enter()
+                .filter(function(d) { return d.democlass == val})
+                .append('div') // add a div for each radio to add
+                .attr('class', 'radio demoDiv text-left')
+                .attr('onclick', function(d) { return "updateDemo('"+  val + "'," + d.val + ")" })
+                .text(function(d){return d.text})
+                .on('mouseenter', function(mouseData,d){
+                    try{
+                        d3.select(this)
+                            .style('background-color','rgb(247, 244, 241)')
+                            .style('border-radius','5px')
+                            .style('border','solid 1px black');
+                    }
+                    catch{
+                    }
+                })
+                .on('mouseleave', function(mouseData,d){
+                    try{
+                        d3.select(this)
+                            .style('background-color','rgba(0,0,0,0)')
+                            .style('border','solid 0px black');
+                    }
+                    catch{
+                    }
+                })
+                ;
+
+            updateDemo(val,-1); // update bar chart
+        }
+    </script>
+    <script>
+    (function () {
+      // Import data
+      Promise.all([
+        d3.json("https://cdn.jsdelivr.net/npm/us-atlas@3/states-albers-10m.json"),
+        d3.csv("May00_dataset_recoded.csv"),
+        d3.csv("June12_dataset_recoded.csv"),
+        d3.csv("Jan20_dataset_recoded.csv"),
+      ]).then(main);
+
+      function main(data) {
+        const years = ["2000", "2012", "2020"];
+        const dataByYear = processData(data.slice(1), years);
+
+        // Use d3.dispatch to coordinate the year toggle and the choropleth
+        const dispatch = d3.dispatch("yearchange");
+
+        const myYearToggle = yearToggle(
+          d3.select("#year-toggle"),
+          years,
+          dispatch
+        );
+
+        const tooltip = initTooltip();
+        const myChoroplethVis = choroplethVis(
+          d3.select("#choropleth"),
+          dataByYear,
+          data[0],
+          tooltip
+        );
+
+        dispatch.on("yearchange", (year) => {
+          myYearToggle.onYearChange(year);
+          myChoroplethVis.onYearChange(year);
+        });
+
+        // Init with year 2020
+        dispatch.call("yearchange", null, "2020");
+      }
+
+      // Process data
+      function processData(data, years) {
+        // Fix state id
+        data.forEach((d) =>
+          d.forEach((e) => {
+            if (e.state.length === 1) e.state = "0" + e.state;
+          })
+        );
+        const dataByYear = new Map();
+        years.forEach((year, i) => {
+          const dataByState = d3.rollup(
+            data[i],
+            (v) => {
+              const totalCount = v.length;
+              const repDemCount = v.filter(
+                (d) => d.party === "1" || d.party === "2"
+              ).length;
+              const repDemPercentage = repDemCount / totalCount;
+              return {
+                repDemPercentage,
+                repDemCount,
+                totalCount,
+              };
+            },
+            (d) => d.state
+          );
+          dataByYear.set(year, dataByState);
+        });
+        return dataByYear;
+      }
+
+      // Tooltip
+      function initTooltip() {
+        const tooltip = d3
+          .select("body")
+          .append("div")
+          .attr("id", "tooltip")
+          .attr("class", "tooltip")
+          .style("position", "absolute")
+          .style("left", 0)
+          .style("top", 0)
+          .style("pointer-events", "none")
+          .style("padding", "0.25em 0.5em")
+          .style("border-radius", "0.25em")
+          .style("background-color", "#fff")
+          .style("font-size", "14px")
+          .style(
+            "box-shadow",
+            "0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12)"
+          )
+          .style("opacity", 0);
+        let width, height;
+        let yOffset = 10;
+
+        function show(html) {
+          tooltip.html(html);
+          tooltip.transition().duration(150).style("opacity", 1);
+          ({ width, height } = tooltip.node().getBoundingClientRect());
+        }
+
+        function hide() {
+          tooltip.transition().duration(150).style("opacity", 0);
+        }
+
+        function move(event) {
+          let x = event.pageX - width / 2;
+          let y = event.pageY - height - yOffset;
+          if (x < 0) {
+            x = 0;
+          } else if (x + width > window.innerWidth) {
+            x = window.innerWidth - width;
+          }
+          if (y < 0) {
+            y = 0;
+          }
+          tooltip.style("transform", `translate(${x}px,${y}px)`);
+        }
+
+        return {
+          show,
+          hide,
+          move,
+        };
+      }
+
+      // Year toggle
+      function yearToggle(container, years, dispatch) {
+        const btnGroup = container
+          .append("div")
+          .attr("class", "btn-group btn-group-toggle")
+          .attr("data-toggle", "buttons");
+        const label = btnGroup
+          .selectAll("label")
+          .data(years)
+          .join("label")
+          .attr("class", "btn btn-primary")
+          .on("click", function (event, d) {
+            dispatch.call("yearchange", null, d);
+          });
+        const input = label
+          .append("input")
+          .attr("type", "radio")
+          .attr("name", "year-toggle")
+          .attr("id", (d) => `year-toggle-${d}`)
+          .attr("value", (d) => d);
+        label.append("span").text((d) => d);
+
+        function onYearChange(year) {
+          label.classed("active", (d) => d === year);
+          input.each(function (d) {
+            this.checked = d === year;
+          });
+        }
+
+        return { onYearChange };
+      }
+
+      // Choropleth
+      function choroplethVis(container, data, geoData, tooltip) {
+        let selectedYear;
+
+        // State labels
+        const stateLabels = [
+          {
+            name: "Alabama",
+            shortName: "Ala.",
+            code: "AL",
+            lon: -86.846935,
+            lat: 32.748813,
+          },
+          {
+            name: "Alaska",
+            shortName: "Alaska",
+            code: "AK",
+            lon: -152.800494,
+            lat: 64.521576,
+          },
+          {
+            name: "Arizona",
+            shortName: "Ariz.",
+            code: "AZ",
+            lon: -111.76616,
+            lat: 34.289639,
+          },
+          {
+            name: "Arkansas",
+            shortName: "Ark.",
+            code: "AR",
+            lon: -92.54884,
+            lat: 34.706977,
+          },
+          {
+            name: "California",
+            shortName: "Calif.",
+            code: "CA",
+            lon: -119.492929,
+            lat: 36.487407,
+          },
+          {
+            name: "Colorado",
+            shortName: "Colo.",
+            code: "CO",
+            lon: -105.833346,
+            lat: 38.787069,
+          },
+          {
+            name: "Connecticut",
+            shortName: "Conn.",
+            code: "CT",
+            lon: -72.64191,
+            lat: 41.610639,
+          },
+          {
+            name: "Delaware",
+            shortName: "Del.",
+            code: "DE",
+            lon: -75.403621,
+            lat: 38.774225,
+          },
+          {
+            name: "District of Columbia",
+            shortName: "D.C.",
+            code: "DC",
+            lon: -77.154662,
+            lat: 38.893513,
+          },
+          {
+            name: "Florida",
+            shortName: "Fla.",
+            code: "FL",
+            lon: -81.595128,
+            lat: 28.115075,
+          },
+          {
+            name: "Georgia",
+            shortName: "Ga.",
+            code: "GA",
+            lon: -83.328636,
+            lat: 32.595284,
+          },
+          {
+            name: "Hawaii",
+            shortName: "Hawaii",
+            code: "HI",
+            lon: -156.209638,
+            lat: 20.669404,
+          },
+          {
+            name: "Idaho",
+            shortName: "Idaho",
+            code: "ID",
+            lon: -114.414282,
+            lat: 43.631214,
+          },
+          {
+            name: "Illinois",
+            shortName: "Ill.",
+            code: "IL",
+            lon: -89.201904,
+            lat: 39.972851,
+          },
+          {
+            name: "Indiana",
+            shortName: "Ind.",
+            code: "IN",
+            lon: -86.097549,
+            lat: 40.005116,
+          },
+          {
+            name: "Iowa",
+            shortName: "Iowa",
+            code: "IA",
+            lon: -93.429677,
+            lat: 42.100653,
+          },
+          {
+            name: "Kansas",
+            shortName: "Kan.",
+            code: "KS",
+            lon: -98.426034,
+            lat: 38.638237,
+          },
+          {
+            name: "Kentucky",
+            shortName: "Ky.",
+            code: "KY",
+            lon: -84.595781,
+            lat: 37.584519,
+          },
+          {
+            name: "Louisiana",
+            shortName: "La.",
+            code: "LA",
+            lon: -92.095684,
+            lat: 30.286048,
+          },
+          {
+            name: "Maine",
+            shortName: "Maine",
+            code: "ME",
+            lon: -69.198597,
+            lat: 45.170175,
+          },
+          {
+            name: "Maryland",
+            shortName: "Md.",
+            code: "MD",
+            lon: -76.893414,
+            lat: 39.350082,
+          },
+          {
+            name: "Massachusetts",
+            shortName: "Mass.",
+            code: "MA",
+            lon: -72.213154,
+            lat: 42.29404,
+          },
+          {
+            name: "Michigan",
+            shortName: "Mich.",
+            code: "MI",
+            lon: -84.707073,
+            lat: 43.012536,
+          },
+          {
+            name: "Minnesota",
+            shortName: "Minn.",
+            code: "MN",
+            lon: -94.470399,
+            lat: 45.874793,
+          },
+          {
+            name: "Mississippi",
+            shortName: "Miss.",
+            code: "MS",
+            lon: -89.668715,
+            lat: 32.652332,
+          },
+          {
+            name: "Missouri",
+            shortName: "Mo.",
+            code: "MO",
+            lon: -92.493657,
+            lat: 38.384581,
+          },
+          {
+            name: "Montana",
+            shortName: "Mont.",
+            code: "MT",
+            lon: -109.619917,
+            lat: 46.825678,
+          },
+          {
+            name: "Nebraska",
+            shortName: "Neb.",
+            code: "NE",
+            lon: -99.386782,
+            lat: 41.396948,
+          },
+          {
+            name: "Nevada",
+            shortName: "Nev.",
+            code: "NV",
+            lon: -116.777518,
+            lat: 39.266187,
+          },
+          {
+            name: "New Hampshire",
+            shortName: "N.H.",
+            code: "NH",
+            lon: -71.524897,
+            lat: 43.487076,
+          },
+          {
+            name: "New Jersey",
+            shortName: "N.J.",
+            code: "NJ",
+            lon: -74.477577,
+            lat: 40.026144,
+          },
+          {
+            name: "New Mexico",
+            shortName: "N.M.",
+            code: "NM",
+            lon: -106.136578,
+            lat: 34.535144,
+          },
+          {
+            name: "New York",
+            shortName: "N.Y.",
+            code: "NY",
+            lon: -74.93293,
+            lat: 42.863612,
+          },
+          {
+            name: "North Carolina",
+            shortName: "N.C.",
+            code: "NC",
+            lon: -78.967915,
+            lat: 35.533388,
+          },
+          {
+            name: "North Dakota",
+            shortName: "N.D.",
+            code: "ND",
+            lon: -100.385719,
+            lat: 47.521776,
+          },
+          {
+            name: "Ohio",
+            shortName: "Ohio",
+            code: "OH",
+            lon: -82.833697,
+            lat: 40.165073,
+          },
+          {
+            name: "Oklahoma",
+            shortName: "Okla.",
+            code: "OK",
+            lon: -97.300953,
+            lat: 35.558163,
+          },
+          {
+            name: "Oregon",
+            shortName: "Ore.",
+            code: "OR",
+            lon: -120.644298,
+            lat: 43.833801,
+          },
+          {
+            name: "Pennsylvania",
+            shortName: "Pa.",
+            code: "PA",
+            lon: -77.931494,
+            lat: 40.80521,
+          },
+          {
+            name: "Rhode Island",
+            shortName: "R.I.",
+            code: "RI",
+            lon: -71.452759,
+            lat: 41.715156,
+          },
+          {
+            name: "South Carolina",
+            shortName: "S.C.",
+            code: "SC",
+            lon: -80.864811,
+            lat: 33.865444,
+          },
+          {
+            name: "South Dakota",
+            shortName: "S.D.",
+            code: "SD",
+            lon: -100.255866,
+            lat: 44.519979,
+          },
+          {
+            name: "Tennessee",
+            shortName: "Tenn.",
+            code: "TN",
+            lon: -86.486922,
+            lat: 35.723523,
+          },
+          {
+            name: "Texas",
+            shortName: "Texas",
+            code: "TX",
+            lon: -98.68354,
+            lat: 32,
+          },
+          {
+            name: "Utah",
+            shortName: "Utah",
+            code: "UT",
+            lon: -111.598568,
+            lat: 39.322743,
+          },
+          {
+            name: "Vermont",
+            shortName: "Vt.",
+            code: "VT",
+            lon: -72.607624,
+            lat: 44.338736,
+          },
+          {
+            name: "Virginia",
+            shortName: "Va.",
+            code: "VA",
+            lon: -78.421295,
+            lat: 37.62125,
+          },
+          {
+            name: "Washington",
+            shortName: "Wash.",
+            code: "WA",
+            lon: -120.438053,
+            lat: 47.430907,
+          },
+          {
+            name: "West Virginia",
+            shortName: "W.Va.",
+            code: "WV",
+            lon: -80.865826,
+            lat: 38.45781,
+          },
+          {
+            name: "Wisconsin",
+            shortName: "Wis.",
+            code: "WI",
+            lon: -89.784782,
+            lat: 44.443288,
+          },
+          {
+            name: "Wyoming",
+            shortName: "Wyo.",
+            code: "WY",
+            lon: -107.581769,
+            lat: 42.977918,
+          },
+        ];
+
+        // Color scale
+        const color = d3.scaleSequential(d3.interpolateYlGnBu).domain([0, 1]);
+
+        renderLegend();
+
+        // Map at most the size of the map's projection size
+        const width = 975;
+        const height = 610;
+
+        const projection = d3.geoAlbersUsa().scale(1300).translate([487.5, 305]);
+        const geoPath = d3.geoPath();
+
+        const svg = container
+          .style("text-align", "center")
+          .style("width", "100%")
+          .style("max-width", "975px")
+          .append("svg")
+          .attr("viewBox", [0, 0, width, height]);
+
+        const g = svg
+          .append("g")
+          .style("fill", "none")
+          .style("stroke-linejoin", "round")
+          .style("stroke-linecap", "round");
+
+        const statePath = g
+          .append("g")
+          .selectAll(".state-path")
+          .data(topojson.feature(geoData, geoData.objects.states).features)
+          .join("path")
+          .attr("class", "state-path")
+          .style("stroke", "#ddd")
+          .attr("d", geoPath)
+          .on("mouseenter", function (event, f) {
+            const d = data.get(selectedYear).get(f.id);
+            if (d === undefined) {
+              tooltip.show(`
+                <div>${f.properties.name}</div>
+                <div>${selectedYear}</div>
+                <div>No data available</div>
+              `);
+            } else {
+              tooltip.show(`
+                <div>${f.properties.name}</div>
+                <div>${selectedYear}</div>
+                <div>${d3.format(".1%")(d.repDemPercentage)} (${d.repDemCount}/${
+                d.totalCount
+              })</div>
+              `);
+            }
+            d3.select(this).raise().style("stroke", "#000");
+          })
+          .on("mouseleave", function (event, f) {
+            tooltip.hide();
+            d3.select(this).lower().style("stroke", "#ddd");
+          })
+          .on("mousemove", tooltip.move);
+
+        const stateLabel = g
+          .append("g")
+          .style("pointer-events", "none")
+          .selectAll(".state-label")
+          .data(stateLabels)
+          .join("text")
+          .attr("transform", (d) => `translate(${projection([d.lon, d.lat])})`)
+          .style("fill", "currentColor")
+          .style("stroke", "#ddd")
+          .style("stroke-width", "3px")
+          .style("paint-order", "stroke")
+          .style("font-size", "12px")
+          .attr("text-anchor", "middle")
+          .attr("dy", "0.32em")
+          .text((d) => d.shortName);
+
+        function renderLegend() {
+          // https://www.visualcinnamon.com/2016/05/smooth-color-legend-d3-svg-gradient
+          const svgWidth = 320;
+          const svgHeight = 60;
+          const margin = {
+            top: 20,
+            right: 60,
+            bottom: 20,
+            left: 10,
+          };
+          const width = svgWidth - margin.left - margin.right;
+          const height = svgHeight - margin.top - margin.bottom;
+
+          const legend = container
+            .append("svg")
+            .attr("class", "legend")
+            .attr("width", svgWidth)
+            .attr("height", svgHeight)
+            .append("g")
+            .attr("class", "slider")
+            .attr("transform", `translate(${margin.left},${margin.top})`);
+
+          // Color gradient
+          const linearGradient = legend
+            .append("linearGradient")
+            .attr("id", "legend-linear-gradient");
+
+          const linearGradientScale = color.copy().domain([0, 100]);
+
+          linearGradient
+            .selectAll("stop")
+            .data(d3.range(101))
+            .join("stop")
+            .attr("offset", (d) => `${d}%`)
+            .attr("stop-color", (d) => linearGradientScale(d));
+
+          legend
+            .append("rect")
+            .attr("width", width)
+            .attr("height", height)
+            .style("fill", "url(#legend-linear-gradient)");
+
+          // Ticks
+          const legendScale = d3
+            .scaleLinear()
+            .domain(color.domain())
+            .range([0, width]);
+
+          legend
+            .append("g")
+            .attr("transform", `translate(0,${height})`)
+            .attr("class", "axis")
+            .style("font-size", "12px")
+            .call(d3.axisBottom(legendScale).ticks(5, "%"))
+            .call((g) => g.select(".domain").remove());
+
+          // Title
+          legend
+            .append("text")
+            .attr("class", "axis-title")
+            .attr("y", -9)
+            .style("font-size", "12px")
+            .style("font-weight", "bold")
+            .text("% Affiliated with Democratic/Republican");
+
+          // No data
+          const noData = legend
+            .append("g")
+            .attr("transform", `translate(${width + 30},0)`);
+          noData
+            .append("rect")
+            .attr("width", 20)
+            .attr("height", 20)
+            .attr("fill", "#eee");
+          noData
+            .append("text")
+            .attr("text-anchor", "middle")
+            .attr("y", 29)
+            .attr("x", 10)
+            .attr("dy", "0.71em")
+            .style("font-size", "12px")
+            .text("No data");
+        }
+
+        function onYearChange(year) {
+          selectedYear = year;
+          statePath.transition().style("fill", (f) => {
+            const d = data.get(year).get(f.id);
+            if (d) {
+              return color(d.repDemPercentage);
+            } else {
+              return "#eee";
+            }
+          });
+        }
+
+        return {
+          onYearChange,
+        };
+      }
+    })();
+</script>
+</body>
+</html>
+
                 </div>
             </div>
         </div>
