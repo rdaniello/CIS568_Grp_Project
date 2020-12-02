@@ -29,8 +29,7 @@
             aria-selected="false">Explore Race Religion Ethnicity</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" id="amough-tab" data-toggle="tab" href="#amough" role="tab" aria-controls="amough"
-              aria-selected="false">Amough</a>
+          <a class="nav-link" id="amogh-tab" data-toggle="tab" href="#amogh" role="tab" aria-controls="amogh" aria-selected="false" onclick='demoDDChangeAm("educ")'>Education & Income</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" id="michael-tab" data-toggle="tab" href="#michael" role="tab" aria-controls="michael"
@@ -92,12 +91,39 @@
             </div>
         </div>
         <!-- Amough Tab -->
-        <div class="tab-pane fade" id="amough" role="tabpanel" aria-labelledby="amough-tab">
-            <div class='container-fluid' style='margin-bottom:50px'>
-                <div class="row" style='margin-bottom: 15px;'>
-                Amough
+        <div class="tab-pane fade" id="amogh" role="tabpanel" aria-labelledby="amogh-tab">
+          <div class='container-fluid' style='margin-bottom:50px'>
+            <div class="row" style='margin-bottom: 15px;'>
+              <div class='col-4 offset-4' style='border:1px solid steelblue; border-radius:10px;'>
+                <div class="row" style='margin:10px;'>
+                  <div class="select" style='padding-right:10px;'>
+                    <select name="slct" id="slct" onchange='demoDDChangeAm(value)'>
+                      <option value="educ">Education</option>
+                      <option value="income">Income</option>
+                    </select>
+                  </div>
                 </div>
+                <!-- Demo selection divs added dyanmically here -->
+                <div id='demoOptionsAm' class='text-center' style='padding-top:5px; padding-left:10px '></div>
+              </div>
             </div>
+            <div class="row">
+              <div class='col-6'>
+                <div id='container2' style='margin-right:15px; margin-left: 15px;'>
+                  <div class='row' style="background-color:rgb(247, 244, 241); border-radius: 10px; padding:5px; border-radius: 10px; border:1px solid steelblue;">
+                    <svg id='canvasDemoAm' width=100% height=100% viewbox='0 0 1000 600' style="background-color:rgb(247, 244, 241);"></svg>
+                  </div>
+                </div>
+              </div>
+              <div class='col-6'>
+                <div id='container2' style='margin-right:15px'>
+                  <div class='row' style="background-color:rgb(247, 244, 241); border-radius: 10px; padding:5px; border-radius: 10px; border:1px solid steelblue;">
+                    <svg id='canvasDemo2Am' width=100% height=100% viewbox='0 0 1000 590' style="background-color:rgb(247, 244, 241);"></svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
           <!-- Michael Tab1 -->
           <div class="tab-pane fade" id="michael" role="tabpanel" aria-labelledby="michael-tab">
@@ -243,6 +269,7 @@
             console.log(data20);
 
             demoDDChange('racemb');  // populate demo dropdown
+            demoDDChangeAm('educ');
         }
 
         function getDataSum(data, feature, val){
@@ -295,6 +322,15 @@
             updateChart(barValsLean, 'canvasDemo', 'Party Leaning of Non-Party Members','% Party Lean', 'Year');
             barValsMem = chartData[0];
             updateChart(barValsMem, 'canvasDemo2', 'Party Membership by Year','% Party Membership', 'Year');
+        }
+
+        function updateDemoAm(cat, selVal) {
+          // get the values for each bar
+          chartData = getChartData(cat, selVal);
+          barValsLean = chartData[1];
+          updateChart(barValsLean, 'canvasDemoAm', 'Party Leaning of Non-Party Members', '% Party Lean', 'Year');
+          barValsMem = chartData[0];
+          updateChart(barValsMem, 'canvasDemo2Am', 'Party Membership by Year', '% Party Membership', 'Year');
         }
 
         function updateChart(data, svgID, title, xLabel, yLabel){
@@ -461,6 +497,42 @@
                 ;
 
             updateDemo(val,-1); // update bar chart
+        }
+
+        function demoDDChangeAm(val) {
+          d3.selectAll('.demoDivAm').remove(); // remove current demo radio buttons
+          let demoDD = d3.select('#demoOptionsAm') // get div to add radio buttons to
+          demoDD.selectAll('div')
+            .data(dRadData)
+            .enter()
+            .filter(function (d) {
+              return d.democlass == val
+            })
+            .append('div') // add a div for each radio to add
+            .attr('class', 'radio demoDivAm text-left')
+            .attr('onclick', function (d) {
+              return "updateDemoAm('" + val + "'," + d.val + ")"
+            })
+            .text(function (d) {
+              return d.text
+            })
+            .on('mouseenter', function (mouseData, d) {
+              try {
+                d3.select(this)
+                  .style('background-color', 'rgb(247, 244, 241)')
+                  .style('border-radius', '5px')
+                  .style('border', 'solid 1px black');
+              } catch {}
+            })
+            .on('mouseleave', function (mouseData, d) {
+              try {
+                d3.select(this)
+                  .style('background-color', 'rgba(0,0,0,0)')
+                  .style('border', 'solid 0px black');
+              } catch {}
+            });
+
+          updateDemoAm(val, -1); // update bar chart
         }
     </script>
     <script>

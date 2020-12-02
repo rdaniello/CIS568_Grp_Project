@@ -19,3 +19,21 @@ hisp,All,-1
 hisp,Hispanic,1
 hisp,Not Hispanic,2
 hisp,Don’t' know/ Refused,9
+educ,All,-1
+educ,Less than high school (Grades 1-8 or no formal schooling),1
+educ,High school incomplete (Grades 9-11 or Grade 12 with NO diploma),2
+educ,High school graduate (Grade 12 with diploma or GED certificate),3
+educ,Some college (no 4-year degree),5
+educ,Four year college or university degree/Bachelors degree (e.g. BS BA AB),6
+educ,Some postgraduate or professional schooling no postgraduate degree,7
+educ,Don't know/Refused,9
+incom,All,-1
+income,Less than $10000,1
+income,$10000 to under $20000,2
+income,$20000 to under $30000,3
+income,$30000 to under $40000,4
+income,$40000 to under $50000,5
+income,$50000 to under $75000,6
+income,$75000 to under $100000,7
+income,$100000 or more,8
+income,Don't know/Refused,9
