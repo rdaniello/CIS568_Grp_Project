@@ -20,12 +20,12 @@ hisp,Hispanic,1
 hisp,Not Hispanic,2
 hisp,Do Not Know/ Refused,9
 educ,All,-1
-educ,Less than high school (Grades 1-8 or no formal schooling),1
-educ,High school incomplete (Grades 9-11 or Grade 12 with NO diploma),2
-educ,High school graduate (Grade 12 with diploma or GED certificate),3
-educ,Some college (no 4-year degree),5
-educ,Four year college or university degree/Bachelors degree (e.g. BS BA AB),6
-educ,Some postgraduate or professional schooling no postgraduate degree,7
+educ,Less than high school,1
+educ,High school incomplete,2
+educ,High school graduate,3
+educ,Some college ,5
+educ,Four year college/Bachelors degree,6
+educ,Some postgraduate schooling,7
 educ,Don't know/Refused,9
 incom,All,-1
 income,Less than $10000,1

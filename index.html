@@ -326,13 +326,13 @@
             updateChart(barValsMem, 'canvasDemo2', 'Party Membership by Year - '  + selTxt,'% Party Membership', 'Year');
         }
 
-        function updateDemoAm(cat, selVal) {
+        function updateDemoAm(cat, selVal, selTxt) {
           // get the values for each bar
           chartData = getChartData(cat, selVal);
           barValsLean = chartData[1];
-          updateChart(barValsLean, 'canvasDemoAm', 'Party Leaning of Non-Party Members', '% Party Lean', 'Year');
+          updateChart(barValsLean, 'canvasDemoAm', 'Party Leaning of Non-Party Members - ' + selTxt, '% Party Lean', 'Year');
           barValsMem = chartData[0];
-          updateChart(barValsMem, 'canvasDemo2Am', 'Party Membership by Year', '% Party Membership', 'Year');
+          updateChart(barValsMem, 'canvasDemo2Am', 'Party Membership by Year - '  + selTxt, '% Party Membership', 'Year');
         }
 
         function updateChart(data, svgID, title, xLabel, yLabel){
@@ -372,7 +372,8 @@
                 function (d){
                         return d.val;
                 })
-            total_extent[0] = (Math.floor(total_extent[0] / 10) * 10) - 5;
+            //total_extent[0] = (Math.floor(total_extent[0] / 10) * 10) - 5;
+            total_extent[0] = 0;
             total_extent[1] = 100;
 
             // make the X and Y scale
@@ -515,7 +516,7 @@
             .append('div') // add a div for each radio to add
             .attr('class', 'radio demoDivAm text-left')
             .attr('onclick', function (d) {
-              return "updateDemoAm('" + val + "'," + d.val + ")"
+              return "updateDemoAm('"+  val + "'," + d.val + ",'" + d.text + "')" 
             })
             .text(function (d) {
               return d.text
@@ -536,7 +537,7 @@
               } catch {}
             });
 
-          updateDemoAm(val, -1); // update bar chart
+          updateDemoAm(val, -1, 'All'); // update bar chart
         }
     </script>
     <script>
