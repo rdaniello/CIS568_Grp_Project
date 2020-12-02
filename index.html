@@ -214,6 +214,7 @@
       </div>
   </div>
     <script>
+        let selDemLabel = '';
         let selDemoVar = 'tot';
         let jan20Data = null
         let jun12Data = null
@@ -315,13 +316,14 @@
                 ]
         }
 
-        function updateDemo(cat, selVal){
+        function updateDemo(cat, selVal, selTxt){
+
             // get the values for each bar
             chartData = getChartData(cat,selVal);
             barValsLean = chartData[1];
-            updateChart(barValsLean, 'canvasDemo', 'Party Leaning of Non-Party Members','% Party Lean', 'Year');
+            updateChart(barValsLean, 'canvasDemo', 'Party Leaning of Non-Party Members - ' + selTxt,'% Party Lean', 'Year');
             barValsMem = chartData[0];
-            updateChart(barValsMem, 'canvasDemo2', 'Party Membership by Year','% Party Membership', 'Year');
+            updateChart(barValsMem, 'canvasDemo2', 'Party Membership by Year - '  + selTxt,'% Party Membership', 'Year');
         }
 
         function updateDemoAm(cat, selVal) {
@@ -348,6 +350,8 @@
 
             // update the select variable to the display value
             svg.selectAll('g')
+                .remove();
+            svg.selectAll('text')
                 .remove();
 
             // get the data and svg element extent (range and domain)
@@ -473,7 +477,7 @@
                 .filter(function(d) { return d.democlass == val})
                 .append('div') // add a div for each radio to add
                 .attr('class', 'radio demoDiv text-left')
-                .attr('onclick', function(d) { return "updateDemo('"+  val + "'," + d.val + ")" })
+                .attr('onclick', function(d) { return "updateDemo('"+  val + "'," + d.val + ",'" + d.text + "')" })
                 .text(function(d){return d.text})
                 .on('mouseenter', function(mouseData,d){
                     try{
@@ -496,7 +500,7 @@
                 })
                 ;
 
-            updateDemo(val,-1); // update bar chart
+            updateDemo(val,-1, "All"); // update bar chart
         }
 
         function demoDDChangeAm(val) {

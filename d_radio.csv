@@ -4,7 +4,7 @@ racemb,White,1
 racemb,Black,2
 racemb,Asian,3
 racemb,Other/ Mixed Race,4
-racemb,Don't Know/ Refused,9
+racemb,Do Not Know/ Refused,9
 relig,All,-1
 relig,Protestant,1
 relig,Roman Catholic,2
@@ -14,11 +14,11 @@ relig,Orthodox,5
 relig,Muslim,6
 relig,Other,7
 relig,Atheist/ No religion,8
-relig,Don’t' know/ Refused,9
+relig,Do Not Know/ Refused,9
 hisp,All,-1
 hisp,Hispanic,1
 hisp,Not Hispanic,2
-hisp,Don’t' know/ Refused,9
+hisp,Do Not Know/ Refused,9
 educ,All,-1
 educ,Less than high school (Grades 1-8 or no formal schooling),1
 educ,High school incomplete (Grades 9-11 or Grade 12 with NO diploma),2
